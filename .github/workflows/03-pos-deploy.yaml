@@ -1,11 +1,13 @@
-# CI Nivel 2 -  Disparo manual a partir de um clique
+# CI Nivel 3 -  Disparo automatico 
 
-name: "Execução Agendada"
+name: "Execução POS DEPLOY"
   # trigers ou gatilhos de execução
   # gatilho manual = workflow_dispatch
 on:
-   schedule:
-    - cron: '40 19 * * *'
+   workflow_run: 
+    workflows: ['Execução Manual']
+    types:
+        - completed
 jobs:
     #descriçao
     e2e-tests:

@@ -29,6 +29,7 @@ jobs:
 
         # disponibilizando relatorio (artefato)
         - uses: actions/upload-artifact@v4
+          if: ${{ !cancelled() }}
           with:
             name: relatorio-E2E
             path: ./playwright-report
