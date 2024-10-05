@@ -24,3 +24,5 @@ jobs:
 
         - name: Instalando Playwright
           run: yarn playwright install  
+        - name: Rodando testes e2e-tests
+          run:  yarn run e2e
