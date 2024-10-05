@@ -1,0 +1,37 @@
+# CI Nivel 1 -  Disparo manual a partir de um clique
+
+name: "Execução Agendada"
+  # trigers ou gatilhos de execução
+  # gatilho manual = workflow_dispatch
+on:
+   schedule:
+    - cron: '0 8 * * 1'
+jobs:
+    #descriçao
+    e2e-tests:
+
+      #maquina que o job vai executar
+      runs-on: ['ubuntu-latest']
+
+      #passo a passo
+      steps:
+        - uses: actions/checkout@v4
+
+        - name: Instalando Yarn
+          run: npm install -g yarn
+
+        - name: Instalando dependencias
+          run: yarn
+
+        - name: Instalando Playwright
+          run: yarn playwright install  
+        - name: Rodando testes e2e-tests
+          run:  yarn run e2e
+
+        # disponibilizando relatorio (artefato)
+        - uses: actions/upload-artifact@v4
+          if: ${{ !cancelled() }}
+          with:
+            name: relatorio-E2E
+            path: ./playwright-report
+           
