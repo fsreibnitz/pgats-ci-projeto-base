@@ -1,0 +1,26 @@
+# CI Nivel 1 -  Disparo manual a partir de um clique
+
+name: "Execução Manual"
+  # trigers ou gatilhos de execução
+  # gatilho manual = workflow_dispatch
+on:
+   workflow_dispatch
+jobs:
+    #descriçao
+    e2e-tests:
+
+      #maquina que o job vai executar
+      runs-on: ['ubuntu-latest']
+
+      #passo a passo
+      steps:
+        - uses: actions/checkout@v4
+
+        - name: Instalando Yarn
+          run: npm install -g Yarn
+
+        - name: Instalando dependencias
+          run: yarn    
+
+        - name: Instalando Playwright
+          run: yarn install playwright  
