@@ -1,8 +1,7 @@
-# CI Nivel 4 -  Disparo manual a partir de um clique
+# CI Nivel 4 
 
-name: "Execução Manual"
-  # trigers ou gatilhos de execução
-  # gatilho manual = workflow_dispatch
+name: "Inspection"
+
 on:
    workflow_dispatch
 jobs:
