@@ -1,51 +1,46 @@
-# CI Nivel 4 
+# CI Nivel 4
 
-name: "Inspection"
+name: 'Inspection'
 
-on:
-   workflow_dispatch
+on: workflow_dispatch
 jobs:
-    #descriçao
-    inspection:
+  #descriçao
+  inspection:
+    #maquina que o job vai executar
+    runs-on: ['ubuntu-latest']
 
-      #maquina que o job vai executar
-      runs-on: ['ubuntu-latest']
+    #passo a passo
+    steps:
+      - uses: actions/checkout@v4
 
-      #passo a passo
-      steps:
-        - uses: actions/checkout@v4
+      - name: Instalando Yarn
+        run: npm install -g yarn
 
-        - name: Instalando Yarn
-          run: npm install -g yarn
+      - name: Instalando dependencias
+        run: yarn
 
-        - name: Instalando dependencias
-          run: yarn
+      - name: Padronização de código (Lint)
+        run: yarn lint
 
-        - name: Padronização de código (Lint)
-          run: yarn lint
+  #descriçao
+  e2e-tests:
+    #maquina que o job vai executar
+    runs-on: ['ubuntu-latest']
 
-    #descriçao
-    e2e-tests:
+    #passo a passo
+    steps:
+      - uses: actions/checkout@v4
 
-      #maquina que o job vai executar
-      runs-on: ['ubuntu-latest']
+      - name: Instalando Yarn
+        run: npm install -g yarn
 
-      #passo a passo
-      steps:
-        - uses: actions/checkout@v4
+      - name: Instalando dependencias
+        run: yarn
+      # CI Nivel 2 -  Disparo manual a partir de um clique
 
-        - name: Instalando Yarn
-          run: npm install -g yarn
-
-        - name: Instalando dependencias
-          run: yarn
-# CI Nivel 2 -  Disparo manual a partir de um clique
-
-
-        # disponibilizando relatorio (artefato)
-        - uses: actions/upload-artifact@v4
-          if: ${{ !cancelled() }}
-          with:
-            name: relatorio-E2E
-            path: ./playwright-report
-           
+      # disponibilizando relatorio (artefato)
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: relatorio-E2E
+          path: ./playwright-report
