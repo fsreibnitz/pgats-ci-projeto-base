@@ -25,6 +25,7 @@ jobs:
   unit:
     #maquina que o job vai executar
     runs-on: ['ubuntu-latest']
+    needs: [inspection]
 
     #passo a passo
     steps:
@@ -40,6 +41,7 @@ jobs:
   e2e-tests:
     #maquina que o job vai executar
     runs-on: ['ubuntu-latest']
+    needs: [unit]
 
     #passo a passo
     steps:
