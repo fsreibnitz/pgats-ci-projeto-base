@@ -50,9 +50,18 @@ jobs:
 
       - name: Instalando dependencias
         run: yarn
-      # CI Nivel 2 -  Disparo manual a partir de um clique
+      
+      - name: Rodando aplicacao
+        run: yarn start &
 
-      # disponibilizando relatorio (artefato)
+      - name: Instalando Playwright
+        run: yarn playwright install
+      - name: Rodando testes e2e-tests
+        run: yarn run e2e
+        env: 
+          URL: "http://localhost:3000/#"
+      
+        # disponibilizando relatorio (artefato)
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
