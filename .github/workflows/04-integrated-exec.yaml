@@ -69,3 +69,11 @@ jobs:
         with:
           name: relatorio-E2E
           path: ./playwright-report
+
+  deploy:
+    #maquina que o job vai executar
+    runs-on: ['ubuntu-latest']
+    needs: [e2e-tests]
+    steps:
+      - name: Deploy
+        run: echo "Step deploy"
