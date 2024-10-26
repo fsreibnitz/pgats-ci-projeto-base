@@ -22,6 +22,20 @@ jobs:
       - name: Padronização de código (Lint)
         run: yarn lint
 
+  unit:
+    #maquina que o job vai executar
+    runs-on: ['ubuntu-latest']
+
+    #passo a passo
+    steps:
+      - uses: actions/checkout@v4
+      - name: Instalando Yarn
+        run: npm install -g yarn
+      - name: Instalando dependencias
+        run: yarn
+      - name: Testes de unidade
+        run: yarn run test
+
   #descriçao
   e2e-tests:
     #maquina que o job vai executar
